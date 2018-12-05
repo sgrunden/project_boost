@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour {
 
-	// Use this for initialization
+    Rigidbody rigidBody;
+	
 	void Start () {
-		
+        rigidBody = GetComponent<Rigidbody>();
 	}
 	
-	// Update is called once per frame
+
 	void Update () {
         ProcessInput();
 	}
@@ -19,7 +20,16 @@ public class Rocket : MonoBehaviour {
     {
         if(Input.GetKey(KeyCode.Space))
         {
+            rigidBody.AddRelativeForce(Vector3.up); // always in the direction that the ship is facing
             print("Space Pressed.");
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            print("Rotating Left.");
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            print("Rotating Right.");
         }
     }
 }
