@@ -22,6 +22,7 @@ public class Rocket : MonoBehaviour {
         Thrust();
     }
 
+    #region Movement 
     private void Thrust()
     {
         if (Input.GetKey(KeyCode.Space))
@@ -41,7 +42,7 @@ public class Rocket : MonoBehaviour {
     private void Rotate()
     {
         rigidBody.freezeRotation = true; // take manual control of rotation
-   
+
         float rotationThisFrame = rcsThrust * Time.deltaTime; // time of last frame, good estimate for current frame
 
         if (Input.GetKey(KeyCode.A))
@@ -53,5 +54,19 @@ public class Rocket : MonoBehaviour {
             transform.Rotate(-Vector3.forward * rotationThisFrame);
         }
         rigidBody.freezeRotation = false; //resume physics control of rotation
+    }
+    #endregion
+
+    void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Friendly":
+                print("All Gucci"); 
+                break;
+            default:
+                print("Get Rekt");
+                break;
+        }
     }
 }
